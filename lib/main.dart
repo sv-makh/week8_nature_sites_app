@@ -91,13 +91,17 @@ class SiteDetailScreen extends StatelessWidget {
         title: Text(sites[index]),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(child: Column(
-        children: [
-          Image(image: AssetImage(sitesImages[index]), ),
-          const SizedBox(height: 20.0,),
-          Text(sitesDescription[index])
-        ],
-      ),)
+      body: Padding(
+        padding: EdgeInsets.all(20.0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Image(image: AssetImage(sitesImages[index]), ),
+              const SizedBox(height: 20.0,),
+              Text(sitesDescription[index])
+            ],
+          ),
+      ))
     );
   }
 }
