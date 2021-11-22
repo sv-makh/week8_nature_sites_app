@@ -13,24 +13,6 @@ class SitesApp extends StatefulWidget {
 class _SitesApp extends State<SitesApp> {
   int _selectedSite = -1;
 
-  /*List<String> sites = [
-    "Алтайский заповедник",
-    "Байкальский заповедник",
-    "Командорский заповедник"
-  ];
-
-  List<String> sitesEng = [
-    "Altai Nature Reserve",
-    "Baikal Nature Reserve",
-    "Komandorsky Nature Reserve"
-  ];
-
-  List<String> sitesImages = [
-    "assets/images/1Uchar_Waterfalls.jpg",
-    "assets/images/2Baical_reservate.jpg",
-    "assets/images/3Medny.jpg"
-  ];*/
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -49,7 +31,15 @@ class _SitesApp extends State<SitesApp> {
               child: SiteDetailScreen(index: _selectedSite)
             )
         ],
-        onPopPage: (route, result) => route.didPop(result),
+        onPopPage: (route, result) {
+          if (!route.didPop(result)) return false;
+
+          setState(() {
+            _selectedSite = -1;
+          });
+
+          return true;
+        },
       )
     );
   }
@@ -82,6 +72,29 @@ class SitesScreen extends StatelessWidget {
           );
         },
       )
+    );
+  }
+}
+
+class SiteDetailScreen extends StatelessWidget {
+  int index;
+
+  SiteDetailScreen({required this.index});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(sites[index]),
+        centerTitle: true,
+      ),
+      body: Column(
+        children: [
+          Image(image: AssetImage(sitesImages[index]), ),
+          SizedBox(height: 20.0,),
+          SingleChildScrollView(child: Text(sitesDescription[index]))
+        ],
+      ),
     );
   }
 }
