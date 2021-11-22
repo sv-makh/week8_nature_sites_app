@@ -28,9 +28,16 @@ class _SitesApp extends State<SitesApp> {
           if (_selectedSite != -1)
             MaterialPage(
               key: ValueKey(_selectedSite),
+              /*
+              страница заповедника строится по индексу заповедника,
+              выбранного пользователем;
+              этот индекс соответствует информации о заповеднике,
+              представленной в массивах в data.dart
+               */
               child: SiteDetailScreen(index: _selectedSite)
             )
         ],
+        //возврат со страницы заповедника на список заповедников
         onPopPage: (route, result) {
           if (!route.didPop(result)) return false;
 
@@ -51,6 +58,7 @@ class _SitesApp extends State<SitesApp> {
   }
 }
 
+//страница со списком заповедников
 class SitesScreen extends StatelessWidget {
   ValueChanged<int> onTapped;
 
@@ -71,6 +79,7 @@ class SitesScreen extends StatelessWidget {
               backgroundImage: AssetImage(sitesImages[index]),),
             title: Text(sites[index]),
             subtitle: Text(sitesEng[index]),
+            //выбор заповедника (его индекса) пользователем
             onTap: () => onTapped(index),
           );
         },
@@ -79,6 +88,7 @@ class SitesScreen extends StatelessWidget {
   }
 }
 
+//страница конкретного заповедника
 class SiteDetailScreen extends StatelessWidget {
   int index;
 
