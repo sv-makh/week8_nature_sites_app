@@ -59,7 +59,10 @@ class SitesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text("Заповедники России"),
+        centerTitle: true,
+      ),
       body: ListView.builder(
         itemCount: sites.length,
         itemBuilder: (BuildContext context, int index) {
@@ -88,13 +91,13 @@ class SiteDetailScreen extends StatelessWidget {
         title: Text(sites[index]),
         centerTitle: true,
       ),
-      body: Column(
+      body: SingleChildScrollView(child: Column(
         children: [
           Image(image: AssetImage(sitesImages[index]), ),
-          SizedBox(height: 20.0,),
-          SingleChildScrollView(child: Text(sitesDescription[index]))
+          const SizedBox(height: 20.0,),
+          Text(sitesDescription[index])
         ],
-      ),
+      ),)
     );
   }
 }
